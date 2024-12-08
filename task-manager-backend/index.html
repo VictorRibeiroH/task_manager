@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testar API</title>
+</head>
+<body>
+    <h1>Testando API</h1>
+    <div id="result"></div>
+    <script>
+        fetch('http://127.0.0.1:8000/api/test', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na requisição: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Sucesso:', data);
+            document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('result').textContent = 'Erro: ' + error.message;
+        });
+    </script>
+</body>
+</html>

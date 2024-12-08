@@ -1,48 +1,33 @@
-import { mockApi } from './mockApi';
+import axios from 'axios';
 
-// Usando o mock API em vez do axios para desenvolvimento
-export default {
-  get: async (url: string) => {
-    if (url === '/tasks') {
-      const data = await mockApi.getTasks();
-      return { data };
-    }
-    throw new Error(`Unhandled GET request to ${url}`);
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   },
+  withCredentials: true
+});
 
-  post: async (url: string, body: any) => {
-    if (url === '/login') {
-      const data = await mockApi.login(body.email, body.password);
-      return { data };
-    }
-    if (url === '/register') {
-      const data = await mockApi.register(body.name, body.email, body.password);
-      return { data };
-    }
-    if (url === '/tasks') {
-      const data = await mockApi.createTask(body);
-      return { data };
-    }
-    throw new Error(`Unhandled POST request to ${url}`);
-  },
-
-  put: async (url: string, body: any) => {
-    const match = url.match(/\/tasks\/(\d+)/);
-    if (match) {
-      const id = parseInt(match[1], 10);
-      const data = await mockApi.updateTask(id, body);
-      return { data };
-    }
-    throw new Error(`Unhandled PUT request to ${url}`);
-  },
-
-  delete: async (url: string) => {
-    const match = url.match(/\/tasks\/(\d+)/);
-    if (match) {
-      const id = parseInt(match[1], 10);
-      await mockApi.deleteTask(id);
-      return { data: null };
-    }
-    throw new Error(`Unhandled DELETE request to ${url}`);
+// Interceptor para adicionar o token em todas as requisições
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-};
+  return config;
+});
+
+// Interceptor para tratamento de erros
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;

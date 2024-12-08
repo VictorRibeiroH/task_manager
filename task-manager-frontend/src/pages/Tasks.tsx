@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -18,7 +19,7 @@ const Tasks: React.FC = () => {
       const { data } = await api.get<Task[]>('/tasks');
       setTasks(data);
     } catch (error) {
-      toast.error('Failed to fetch tasks');
+      toast.error('Erro ao carregar tarefas');
     }
   };
 
@@ -31,9 +32,9 @@ const Tasks: React.FC = () => {
       await api.post('/tasks', taskData);
       fetchTasks();
       setIsFormOpen(false);
-      toast.success('Task criada com sucesso!');
+      toast.success('Task criada com sucesso');
     } catch (error) {
-      toast.error('Erro na criação da task');
+      toast.error('Erro ao criar Task');
     }
   };
 
@@ -43,9 +44,9 @@ const Tasks: React.FC = () => {
       await api.put(`/tasks/${editingTask.id}`, taskData);
       fetchTasks();
       setEditingTask(null);
-      toast.success('Task atualizada');
+      toast.success('Task atualizada com sucesso');
     } catch (error) {
-      toast.error('Erro em atualizar a Task');
+      toast.error('Erro ao atualizar Task');
     }
   };
 
@@ -53,9 +54,9 @@ const Tasks: React.FC = () => {
     try {
       await api.delete(`/tasks/${id}`);
       fetchTasks();
-      toast.success('Task deltada');
+      toast.success('Task excluída com sucesso');
     } catch (error) {
-      toast.error('Erro em deletar a Task');
+      toast.error('Erro ao excluir Task');
     }
   };
 
@@ -64,12 +65,12 @@ const Tasks: React.FC = () => {
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Task Manager</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Gerenciador de Tarefas</h1>
             <button
               onClick={logout}
               className="text-gray-500 hover:text-gray-700"
             >
-              Logout
+              Sair
             </button>
           </div>
         </div>
@@ -91,7 +92,7 @@ const Tasks: React.FC = () => {
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4">
               <div className="bg-white rounded-lg p-6 max-w-md w-full">
                 <h2 className="text-xl font-semibold mb-4">
-                  {editingTask ? 'Edit Task' : 'Create Task'}
+                  {editingTask ? 'Editar Task' : 'Criar Task'}
                 </h2>
                 <TaskForm
                   task={editingTask || undefined}

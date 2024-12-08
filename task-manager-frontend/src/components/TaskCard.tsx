@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
 import { Task } from '../types/task';
 
@@ -9,14 +8,20 @@ interface TaskCardProps {
 }
 
 const statusColors = {
-  pendente: 'bg-yellow-100 text-yellow-800',
-  em_progresso: 'bg-blue-100 text-blue-800',
-  completa: 'bg-green-100 text-green-800',
+  pending: 'bg-yellow-100 text-yellow-800',
+  in_progress: 'bg-blue-100 text-blue-800',
+  completed: 'bg-green-100 text-green-800',
+};
+
+const statusLabels = {
+  pending: 'Pendente',
+  in_progress: 'Em Progresso',
+  completed: 'Concluída',
 };
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+    <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-semibold">{task.title}</h3>
         <div className="flex space-x-2">
@@ -41,10 +46,10 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
             statusColors[task.status]
           }`}
         >
-          {task.status.replace('_', ' ')}
+          {statusLabels[task.status]}
         </span>
         <span className="text-sm text-gray-500">
-          {new Date(task.created_at).toLocaleDateString()}
+          {new Date(task.created_at).toLocaleDateString('pt-BR')}
         </span>
       </div>
     </div>

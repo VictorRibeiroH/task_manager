@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Task } from '../types/task';
 
 let mockTasks: Task[] = [
@@ -5,7 +6,7 @@ let mockTasks: Task[] = [
     id: 1,
     title: 'Completar documentação',
     description: 'Escrever a documentação do projeto',
-    status: 'pendente',
+    status: 'pending',
     created_at: '2024-03-14T10:00:00.000Z',
     updated_at: '2024-03-14T10:00:00.000Z'
   },
@@ -13,7 +14,7 @@ let mockTasks: Task[] = [
     id: 2,
     title: 'Implementar autenticação',
     description: 'Adicionar sistema de login e registro',
-    status: 'em_progresso',
+    status: 'in_progress',
     created_at: '2024-03-14T11:00:00.000Z',
     updated_at: '2024-03-14T11:00:00.000Z'
   }

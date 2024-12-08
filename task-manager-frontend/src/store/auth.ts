@@ -17,9 +17,15 @@ export const useAuthStore = create<AuthState>((set) => ({
     localStorage.setItem('token', token);
     set({ user, isAuthenticated: true });
   },
-  logout: () => {
-    localStorage.removeItem('token');
-    set({ user: null, isAuthenticated: false });
+  logout: async () => {
+    try {
+      await api.post('/logout');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    } finally {
+      localStorage.removeItem('token');
+      set({ user: null, isAuthenticated: false });
+    }
   },
   initialize: async () => {
     const token = localStorage.getItem('token');

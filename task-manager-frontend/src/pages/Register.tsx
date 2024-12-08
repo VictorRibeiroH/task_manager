@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserPlus } from 'lucide-react';
@@ -18,9 +19,9 @@ const Register: React.FC = () => {
       const { data } = await api.post('/register', { name, email, password });
       login(data.token, data.user);
       navigate('/tasks');
-      toast.success('Conta criada com sucesso!');
+      toast.success('Account created successfully!');
     } catch (error) {
-      toast.error('Ops, temos algum erro. Por favor tente novamente.');
+      toast.error('Registration failed. Please try again.');
     }
   };
 
@@ -52,7 +53,7 @@ const Register: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Seu melhor email"
+                placeholder="Seu email"
               />
             </div>
             <div>
@@ -62,7 +63,7 @@ const Register: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Agora sua senha"
+                placeholder="Sua senha"
               />
             </div>
           </div>
@@ -72,7 +73,7 @@ const Register: React.FC = () => {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Criar conta
+              Criar conta!
             </button>
           </div>
 
@@ -81,7 +82,7 @@ const Register: React.FC = () => {
               to="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              Já tem conta? Faça o Login!
+              Já tem uma conta? Faça Login!
             </Link>
           </div>
         </form>
