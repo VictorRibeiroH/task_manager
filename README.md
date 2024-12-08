@@ -56,3 +56,9 @@ Certifique-se de ter instalado em sua máquina:
 3. **Inicie o servidor de desenvolvimento**
     ```bash
     npm run dev
+
+## Vídeo de Demonstração
+
+Clique na imagem abaixo para assistir ao vídeo de demonstração:
+
+[![Miniatura do Vídeo](https://via.placeholder.com/600x400?text=Clique+para+assistir+ao+vídeo)](https://github.com/VictorRibeiroH/task_manager/raw/main/task-manager-frontend/src/assets/Demo.mp4)
