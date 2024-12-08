@@ -26,7 +26,7 @@ Certifique-se de ter instalado em sua máquina:
    composer install
 3. **Copie o arquivo de exemplo .env.example para .env**
     ```bash
-    cp .env.example .env
+    cp .env.example .env ou copy .env.example .env
 4. **Atualize o arquivo .env com as credenciais do banco de dados.**
     ```bash
     DB_CONNECTION=mysql
